@@ -1,4 +1,6 @@
-const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,WORLD={w:4800,h:3600};
+let W=960,H=600;const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d'),WORLD={w:4800,h:3600};
+function resizeGame(){const box=canvas.parentElement.getBoundingClientRect();if(!box.width||!box.height)return;W=960;H=Math.max(360,Math.round(W*box.height/box.width));canvas.width=W;canvas.height=H;}
+resizeGame();window.addEventListener('resize',resizeGame);if(window.visualViewport)window.visualViewport.addEventListener('resize',resizeGame);
 const ROAD_X=[200,640,1080,1520,1960,2400,2840,3280,3720,4160,4600],ROAD_Y=[160,560,960,1360,2240,2640,3040,3440],$=s=>document.querySelector(s);
 const BRIDGE_X=[ROAD_X[1],ROAD_X[4],ROAD_X[6],ROAD_X[9]],ELK_BRIDGE_Y=[ROAD_Y[1],ROAD_Y[2],ROAD_Y[3]],LOTS=[];
 for(let gy=0;gy<ROAD_Y.length-1;gy++)for(let gx=0;gx<ROAD_X.length-1;gx++)LOTS.push({gx,gy,x:ROAD_X[gx]+58,y:ROAD_Y[gy]+58,w:ROAD_X[gx+1]-ROAD_X[gx]-116,h:ROAD_Y[gy+1]-ROAD_Y[gy]-116});
